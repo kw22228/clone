@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <button id="btn">Click me!</button>
+        <div id="cnt">0</div>
+    </body>
+    <script>
+        function Cnt() {
+            let cnt = 0;
+
+            return {
+                plus() {
+                    cnt++;
+                },
+                minus() {
+                    cnt--;
+                },
+                get() {
+                    return cnt;
+                },
+            };
+        }
+
+        const button = document.querySelector('#btn');
+        const div = document.querySelector('#cnt');
+        const cnt = Cnt();
+        button.addEventListener('click', () => {
+            cnt.plus();
+            div.innerHTML = cnt.get();
+        });
+    </script>
+</html>
