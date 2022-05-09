@@ -1,3 +1,7 @@
 .hidden {
     display: none;
 }
+
+#todo-list > li > button {
+    margin-left: 10px;
+}
