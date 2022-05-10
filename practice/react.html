@@ -20,30 +20,34 @@
         <script type="text/babel">
             const root = document.getElementById('root');
 
-            const Title = () => {
-                const mouseEnter = () => console.log('Hello Wolrd');
-
+            const Title = ({ counter }) => {
+                const mouseEnter = () => console.log(counter);
                 return (
-                    <h3 id="title" onMouseEnter={mouseEnter}>
-                        Hello Wolrd!!
+                    <h3 id="title" className="title" onMouseEnter={mouseEnter}>
+                        Total Count : {counter}
                     </h3>
                 );
             };
 
-            const Button = () => {
-                const onClick = () => console.log('click');
-
+            const Button = ({ setCounter }) => {
+                const onClick = () => {
+                    setCounter(prev => prev + 2);
+                };
                 return <button onClick={onClick}>Click me!!</button>;
             };
 
-            const container = (
-                <div>
-                    <Title />
-                    <Button />
-                </div>
-            );
+            const App = () => {
+                const [counter, setCounter] = React.useState(0);
 
-            ReactDOM.render(container, root);
+                return (
+                    <div>
+                        <Title counter={counter} />
+                        <Button setCounter={setCounter} />
+                    </div>
+                );
+            };
+
+            ReactDOM.render(<App />, root);
         </script>
     </body>
 </html>
