@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script
+            crossorigin
+            src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"
+        ></script>
+        <script
+            crossorigin
+            src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"
+        ></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            const MinutesToHours = () => {
+                const [minutes, setMinutes] = React.useState(0);
+                const [flipped, setFlipped] = React.useState(false);
+
+                const minuteChange = e => setMinutes(e.target.value);
+                const resetClick = () => setMinutes(0);
+                const flipClick = () => {
+                    resetClick();
+                    setFlipped(prev => !prev);
+                };
+                return (
+                    <div>
+                        <h1 className="title">Minutes & Hours Converter</h1>
+                        <div>
+                            <label htmlFor="minutes">Minutes</label>
+                            <br />
+                            <input
+                                type="number"
+                                placeholder="Minutes"
+                                id="minutes"
+                                value={flipped ? minutes * 60 : minutes}
+                                onChange={minuteChange}
+                                disabled={flipped}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="hours">Hours</label>
+                            <br />
+                            <input
+                                type="number"
+                                placeholder="Hours"
+                                id="hours"
+                                value={flipped ? minutes : Math.round(minutes / 60)}
+                                onChange={minuteChange}
+                                disabled={!flipped}
+                            />
+                        </div>
+                        <button onClick={resetClick}>Reset</button>
+                        <button onClick={flipClick}>{!flipped ? 'Flip' : 'Turn back'}</button>
+                    </div>
+                );
+            };
+            const KmToM = () => {
+                return <h1>Killometer & Meter Converter</h1>;
+            };
+            const App = () => {
+                const [selection, setSelection] = React.useState(0);
+                const selectChange = e => {
+                    setSelection(e.target.value);
+                };
+
+                return (
+                    <div>
+                        <h1>Select Converter</h1>
+
+                        <select onChange={selectChange}>
+                            <option value="0">Select</option>
+                            <option value="1">Minutes & Hours Converter</option>
+                            <option value="2">Killometer & Meter Converter</option>
+                        </select>
+                        <hr />
+                        {selection === '1' && <MinutesToHours />}
+                        {selection === '2' && <KmToM />}
+                    </div>
+                );
+            };
+
+            ReactDOM.render(<App />, document.getElementById('root'));
+        </script>
+    </body>
+</html>
