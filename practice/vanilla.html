@@ -17,14 +17,44 @@
     <body>
         <div id="root"></div>
         <script>
-            const root = document.getElementById('root');
-            const span = React.createElement('span', {
-                id: 'sp',
-                class: 'sp',
-                children: 'Hello World',
-            });
+            function Cnt() {
+                let cnt = 0;
 
-            ReactDOM.render(span, root);
+                return {
+                    plus() {
+                        cnt++;
+                    },
+                    minus() {
+                        cnt--;
+                    },
+                    get() {
+                        return cnt;
+                    },
+                };
+            }
+
+            const cnt = Cnt();
+            const root = document.getElementById('root');
+            const p = React.createElement(
+                'p',
+                {
+                    onMouseEnter: () => console.log('Hello World'),
+                },
+                'Hello World'
+            );
+            const btn = React.createElement(
+                'button',
+                {
+                    onClick: () => {
+                        console.log('click');
+                    },
+                },
+                'Click me!!'
+            );
+
+            const container = React.createElement('div', null, [p, btn]);
+
+            ReactDOM.render(container, root);
         </script>
     </body>
 </html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script
+            crossorigin
+            src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"
+        ></script>
+        <script
+            crossorigin
+            src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"
+        ></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            const root = document.getElementById('root');
+
+            const Title = () => {
+                const mouseEnter = () => console.log('Hello Wolrd');
+
+                return (
+                    <h3 id="title" onMouseEnter={mouseEnter}>
+                        Hello Wolrd!!
+                    </h3>
+                );
+            };
+
+            const Button = () => {
+                const onClick = () => console.log('click');
+
+                return <button onClick={onClick}>Click me!!</button>;
+            };
+
+            const container = (
+                <div>
+                    <Title />
+                    <Button />
+                </div>
+            );
+
+            ReactDOM.render(container, root);
+        </script>
+    </body>
+</html>
