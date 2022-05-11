@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+        <script
+            crossorigin
+            src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"
+        ></script>
+        <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            const Button = React.memo(({ children, color = 'orange', onClick }) => {
+                console.log(children);
+                return (
+                    <button
+                        onClick={onClick}
+                        style={{
+                            backgroundColor: color ? color : 'orange',
+                            color: 'white',
+                            padding: '10px 20px',
+                            border: 0,
+                            borderRadius: 10,
+                        }}
+                    >
+                        {children}
+                    </button>
+                );
+            });
+            Button.propTypes = {
+                children: PropTypes.string,
+                color: PropTypes.string.isRequired,
+                onClick: PropTypes.func,
+            };
+            const App = () => {
+                const [value, setValue] = React.useState(false);
+                const changeValue = () => setValue(prev => !prev);
+                return (
+                    <div>
+                        <Button
+                            children={value ? 'Confirm Button' : 'Save Button'}
+                            color={value ? 'red' : 'blue'}
+                            onClick={changeValue}
+                        />
+                        <Button children="Normal Button" />
+                    </div>
+                );
+            };
+
+            ReactDOM.render(<App />, document.getElementById('root'));
+        </script>
+    </body>
+</html>
