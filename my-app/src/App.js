@@ -31,7 +31,6 @@ function App() {
     //         <Button text="Continue" onClick={onClick} />
     //     </div>
     // );
-
     const [show, setShow] = useState(false);
     const onClick = () => setShow(prev => !prev);
     return (
