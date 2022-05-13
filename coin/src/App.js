@@ -4,7 +4,7 @@ function App() {
     const [loading, setLoading] = useState(true);
     const [coins, setCoins] = useState([]);
     const [wallet, setWallet] = useState('');
-
+    const [canBuy, setCanBuy] = useState('');
     useEffect(() => {
         fetch('https://api.coinpaprika.com/v1/tickers/?limit=100')
             .then(res => res.json())
@@ -16,15 +16,16 @@ function App() {
 
     const coinChange = e => {
         console.log(e.target.value);
+        setCanBuy(Math.floor(wallet / e.target.value));
     };
 
     function Coins() {
         return (
             <select onChange={coinChange}>
-                <option>Select</option>
+                <option value="">Select</option>
                 {coins.map(({ id, name, symbol, quotes }) => (
                     <option key={id} value={quotes.USD.price}>
-                        {name} ({symbol}) ${Math.ceil(quotes.USD.price)} USD
+                        {name} ({symbol}) ${quotes.USD.price} USD
                     </option>
                 ))}
             </select>
@@ -41,7 +42,12 @@ function App() {
             )}
 
             <hr />
-            {wallet && <Coins />}
+            {wallet && (
+                <>
+                    <Coins />
+                    {canBuy && <h3>You can buy {canBuy} coins!!</h3>}
+                </>
+            )}
         </div>
     );
 }
