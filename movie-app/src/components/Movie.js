@@ -1,22 +1,28 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-export default function Movie({ title, summary, genres, large_cover_image }) {
+function Movie({ id, title, summary, genres, large_cover_image }) {
     return (
         <div style={{ backgroundImage: `url(${large_cover_image})` }}>
-            <h2>{title}</h2>
-            <p>{summary}</p>
-            <ul>
-                {genres?.map((genre, index) => (
-                    <li key={index}>{genre}</li>
-                ))}
-            </ul>
+            <Link to={`/movie/${id}`}>
+                <h2>{title}</h2>
+                <p>{summary}</p>
+                <ul>
+                    {genres?.map((genre, index) => (
+                        <li key={index}>{genre}</li>
+                    ))}
+                </ul>
+            </Link>
         </div>
     );
 }
 
 Movie.propTypes = {
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     summary: PropTypes.string.isRequired,
     genres: PropTypes.arrayOf(PropTypes.string),
     large_cover_image: PropTypes.string.isRequired,
 };
+
+export default Movie;
