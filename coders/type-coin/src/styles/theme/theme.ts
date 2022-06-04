@@ -3,13 +3,11 @@ import { DefaultTheme } from 'styled-components';
 export const lightTheme: DefaultTheme = {
     bgColor: 'white',
     textColor: 'black',
-    btnColor: 'teal',
-    borderColor: 'black',
+    accentColor: '#44bd32',
 };
 
 export const darkTheme: DefaultTheme = {
-    bgColor: 'black',
-    textColor: 'white',
-    btnColor: 'tomato',
-    borderColor: 'white',
+    bgColor: '#2f3640',
+    textColor: '#f5f6fa',
+    accentColor: 'skyblue',
 };
