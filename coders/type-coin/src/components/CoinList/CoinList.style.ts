@@ -10,9 +10,10 @@ export const Coin = styled.li`
 
     a {
         transition: all 0.3s ease-in-out;
-        display: block;
+        display: flex;
         padding: 20px;
         border-radius: 15px;
+        align-items: center;
     }
     &:hover {
         a {
@@ -20,4 +21,10 @@ export const Coin = styled.li`
             color: ${props => props.theme.textColor};
         }
     }
+`;
+
+export const CoinImage = styled.img`
+    width: 35px;
+    height: 35px;
+    margin-right: 8px;
 `;

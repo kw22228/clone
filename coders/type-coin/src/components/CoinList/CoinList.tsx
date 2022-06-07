@@ -1,43 +1,44 @@
 import * as s from './CoinList.style';
 import { Link } from 'react-router-dom';
-
-const coins = [
-    {
-        id: 'btc-bitcoin',
-        name: 'Bitcoin',
-        symbol: 'BTC',
-        rank: 1,
-        is_new: false,
-        is_active: true,
-        type: 'coin',
-    },
-    {
-        id: 'eth-ethereum',
-        name: 'Ethereum',
-        symbol: 'ETH',
-        rank: 2,
-        is_new: false,
-        is_active: true,
-        type: 'coin',
-    },
-    {
-        id: 'hex-hex',
-        name: 'HEX',
-        symbol: 'HEX',
-        rank: 3,
-        is_new: false,
-        is_active: true,
-        type: 'token',
-    },
-];
+import { useEffect, useState } from 'react';
+import { Loading } from '../Loading';
+interface CoinInterface {
+    id: string;
+    name: string;
+    symbol: string;
+    rank: number;
+    is_new: boolean;
+    is_active: boolean;
+    type: string;
+}
 
 const CoinList = () => {
-    return (
+    const [coins, setCoins] = useState<CoinInterface[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    const getCoins = async () => {
+        const res = await fetch('https://api.coinpaprika.com/v1/coins');
+        const data = await res.json();
+        setCoins(data.slice(0, 100));
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        getCoins();
+    }, []);
+
+    return loading ? (
+        <Loading />
+    ) : (
         <s.CoinList>
-            {coins.map(({ id, name }) => (
-                <s.Coin>
-                    <Link to={`/${id}`} key={id}>
-                        {name} &rarr;
+            {coins.map(({ id, name, symbol }) => (
+                <s.Coin key={id}>
+                    <Link to={`/${id}`} state={{ coinName: name }} key={id}>
+                        <s.CoinImage
+                            src={`https://coinicons-api.vercel.app/api/icon/${symbol.toLowerCase()}`}
+                        ></s.CoinImage>
+                        {name}
+                        &rarr;
                     </Link>
                 </s.Coin>
             ))}
