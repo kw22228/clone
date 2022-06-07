@@ -1,12 +1,34 @@
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import { CoinDetail } from '../components/CoinDetail';
+import { Header } from '../components/Header';
+import { Container } from '../styles/variable';
 
-interface Params {
+interface ParamsInterface {
     coinId: string;
 }
 
+interface LocationInterface {
+    state: {
+        coinName: string;
+    };
+}
+
 const CoinDetailPage = () => {
-    const { coinId } = useParams<keyof Params>() as Params;
-    return <h1>CoinDetail - {coinId}</h1>;
+    const { coinId } = useParams<keyof ParamsInterface>() as ParamsInterface;
+
+    //Link에서 state를 태워서 보낸 값
+    // const {
+    //     state: { coinName },
+    // } = useLocation() as LocationInterface;
+
+    // console.log(coinName);
+
+    return (
+        <Container>
+            <Header title={coinId} />
+            <CoinDetail coinId={coinId} />
+        </Container>
+    );
 };
 
 export default CoinDetailPage;
