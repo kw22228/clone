@@ -1,4 +1,4 @@
-import { useLocation, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { CoinDetail } from '../components/CoinDetail';
 import { Header } from '../components/Header';
 import { Container } from '../styles/variable';
@@ -27,6 +27,8 @@ const CoinDetailPage = () => {
         <Container>
             <Header title={coinId} />
             <CoinDetail coinId={coinId} />
+
+            <Outlet />
         </Container>
     );
 };
