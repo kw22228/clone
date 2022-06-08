@@ -3,29 +3,26 @@ import { CoinDetail } from '../components/CoinDetail';
 import { Header } from '../components/Header';
 import { Container } from '../styles/variable';
 
-interface ParamsInterface {
+interface IParams {
     coinId: string;
 }
 
-interface LocationInterface {
+interface ILocation {
     state: {
         coinName: string;
     };
 }
 
 const CoinDetailPage = () => {
-    const { coinId } = useParams<keyof ParamsInterface>() as ParamsInterface;
-
+    const { coinId } = useParams<keyof IParams>() as IParams;
     //Link에서 state를 태워서 보낸 값
-    // const {
-    //     state: { coinName },
-    // } = useLocation() as LocationInterface;
-
-    // console.log(coinName);
+    const {
+        state: { coinName },
+    } = useLocation() as ILocation;
 
     return (
         <Container>
-            <Header title={coinId} />
+            <Header title={coinName} />
             <CoinDetail coinId={coinId} />
 
             <Outlet />
