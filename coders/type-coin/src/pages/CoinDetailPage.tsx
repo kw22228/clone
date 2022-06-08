@@ -22,7 +22,7 @@ const CoinDetailPage = () => {
 
     return (
         <Container>
-            <Header title={coinName} />
+            <Header title={coinName} coinId={coinId} />
             <CoinDetail coinId={coinId} />
 
             <Outlet />
