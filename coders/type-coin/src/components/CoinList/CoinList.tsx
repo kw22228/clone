@@ -1,8 +1,8 @@
 import * as s from './CoinList.style';
 import { Link } from 'react-router-dom';
 import { Loading } from '../Loading';
-import { useQuery } from 'react-query';
-import { fetchDataSlice } from '../../api';
+import { useFetchSlice } from '../../hooks';
+
 interface ICoin {
     id: string;
     name: string;
@@ -14,7 +14,7 @@ interface ICoin {
 }
 
 const CoinList = () => {
-    const { isLoading, data } = useQuery<ICoin[]>('allCoins', () => fetchDataSlice('coins', 100));
+    const { isLoading, data } = useFetchSlice<ICoin[]>('allCoins', 'coins', 100);
     return isLoading ? (
         <Loading />
     ) : (

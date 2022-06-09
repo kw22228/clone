@@ -2,21 +2,27 @@ import { Loading } from '../Loading';
 import { ICoinInfo, ICoinPrice, IProps } from './types';
 import * as s from './CoinDetail.style';
 import { Link, useMatch } from 'react-router-dom';
-import { useQuery } from 'react-query';
-import { fetchData } from '../../api';
+import { useFetch } from '../../hooks';
+import { useEffect } from 'react';
 
-const CoinDetail = ({ coinId }: IProps) => {
+const CoinDetail = ({ coinId, setCoinDetail }: IProps) => {
     const priceMatch = useMatch('/:coinId/price');
     const chartMatch = useMatch('/:coinId/chart');
 
-    const { isLoading: detailLoading, data: detailData } = useQuery<ICoinInfo | undefined>(
+    const { isLoading: detailLoading, data: detailData } = useFetch<ICoinInfo>(
         ['detail', coinId],
-        () => fetchData(`coins/${coinId}`)
+        `coins/${coinId}`
     );
-    const { isLoading: priceLoading, data: priceData } = useQuery<ICoinPrice | undefined>(
+
+    const { isLoading: priceLoading, data: priceData } = useFetch<ICoinPrice>(
         ['price', coinId],
-        () => fetchData(`tickers/${coinId}`)
+        `tickers/${coinId}`,
+        { refetchInterval: 1000 * 10 }
     );
+
+    useEffect(() => {
+        setCoinDetail(detailData);
+    }, [detailLoading]);
 
     return detailLoading || priceLoading ? (
         <Loading />
@@ -33,8 +39,8 @@ const CoinDetail = ({ coinId }: IProps) => {
                         <div>{detailData?.symbol}</div>
                     </s.Item>
                     <s.Item>
-                        <div>OPEN SOURCE</div>
-                        <div>{detailData?.open_source ? 'YES' : 'NO'}</div>
+                        <div>Price</div>
+                        <div>{priceData?.quotes.USD.price.toFixed(3)}</div>
                     </s.Item>
                 </s.RoundBox>
                 <s.Description>{detailData?.description}</s.Description>
