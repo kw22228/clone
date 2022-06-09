@@ -1,5 +1,11 @@
+import { Chart } from '../components/Chart';
+
 const ChartPage = () => {
-    return <h1>Chart</h1>;
+    return (
+        <>
+            <Chart />
+        </>
+    );
 };
 
 export default ChartPage;
