@@ -7,6 +7,7 @@ const getQuery = (path: string) => `${BASE_URL}/${path}`;
 export async function fetchData(path: string) {
     const url = getQuery(path);
     const response = await axios.get(url);
+
     return response.data;
 }
 
