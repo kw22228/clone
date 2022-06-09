@@ -4,7 +4,7 @@ import { useMatch } from 'react-router-dom';
 import * as s from './Header.style';
 import { ICoinInfo } from '../CoinDetail/types';
 interface IHeader {
-    title: string;
+    title?: string;
     coinId?: string;
 }
 

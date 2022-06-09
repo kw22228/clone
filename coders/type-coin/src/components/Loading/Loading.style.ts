@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh;
+    height: 40vh;
     font-size: 1.2rem;
 `;
 export const Loading = styled.div`

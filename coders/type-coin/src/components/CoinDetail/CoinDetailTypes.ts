@@ -39,7 +39,7 @@ export interface Whitepaper {
     thumbnail: string;
 }
 
-export interface RootObject {
+export interface IcoinInfo {
     id: string;
     name: string;
     symbol: string;

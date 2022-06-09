@@ -10,7 +10,8 @@ export const Header = styled.header`
 
 export const Title = styled.h1`
     color: ${props => props.theme.accentColor};
-    font-size: 48px;
+    font-size: 38px;
+    font-weight: bold;
 `;
 
 export const HomeLink = styled(Link)`
