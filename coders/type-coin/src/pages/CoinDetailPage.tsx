@@ -7,24 +7,14 @@ interface IParams {
     coinId: string;
 }
 
-interface ILocation {
-    state: {
-        coinName: string;
-    };
-}
-
 const CoinDetailPage = () => {
     const { coinId } = useParams<keyof IParams>() as IParams;
     //Link에서 state를 태워서 보낸 값
-    const {
-        state: { coinName },
-    } = useLocation() as ILocation;
 
     return (
         <Container>
-            <Header title={coinName} coinId={coinId} />
+            <Header title={coinId} coinId={coinId} />
             <CoinDetail coinId={coinId} />
-
             <Outlet />
         </Container>
     );
