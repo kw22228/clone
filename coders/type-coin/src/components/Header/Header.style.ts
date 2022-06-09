@@ -14,15 +14,14 @@ export const Title = styled.h1`
     font-weight: bold;
 `;
 
-export const HomeLink = styled(Link)`
+export const CustomLink = styled(Link)`
     position: absolute;
+    right: 20px;
     background-color: ${props => props.theme.textColor};
     color: ${props => props.theme.bgColor};
     padding: 8px 15px;
     font-weight: bold;
     border-radius: 20px;
-    right: 20px;
-    top: 25px;
     transition: all 0.3s ease-in-out;
 
     &:hover {

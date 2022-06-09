@@ -1,25 +1,31 @@
-import { useEffect } from 'react';
-import { useQueryClient } from 'react-query';
 import { useMatch } from 'react-router-dom';
 import * as s from './Header.style';
-import { ICoinInfo } from '../CoinDetail/types';
+import { Helmet } from 'react-helmet';
 interface IHeader {
     title?: string;
     coinId?: string;
+    symbol?: string | undefined;
 }
 
-const Header = ({ title, coinId }: IHeader) => {
+const Header = ({ title, coinId, symbol }: IHeader) => {
     const homeMatch = useMatch('/');
 
-    // const queryClient = useQueryClient();
-
-    // const detailCoinData = queryClient.getQueryData<ICoinInfo>(['detail', coinId]);
-
     return (
-        <s.Header>
-            <s.Title>{title}</s.Title>
-            {!homeMatch && <s.HomeLink to="/">Home</s.HomeLink>}
-        </s.Header>
+        <>
+            <Helmet>
+                <title>{title}</title>
+            </Helmet>
+            <s.Header>
+                {symbol && (
+                    <img
+                        style={{ width: 35, height: 35, marginRight: '10px' }}
+                        src={`https://coinicons-api.vercel.app/api/icon/${symbol.toLowerCase()}`}
+                    />
+                )}
+                <s.Title>{title}</s.Title>
+                {!homeMatch && title && <s.CustomLink to="/">Back</s.CustomLink>}
+            </s.Header>
+        </>
     );
 };
 
