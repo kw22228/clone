@@ -37,11 +37,11 @@ const Chart = () => {
                     series={[
                         {
                             name: 'high',
-                            data: data?.map(price => Math.floor(price.high)) ?? [],
+                            data: data?.map(price => price.high) ?? [],
                         },
                         {
                             name: 'low',
-                            data: data?.map(price => Math.floor(price.low)) ?? [],
+                            data: data?.map(price => price.low) ?? [],
                         },
                     ]}
                     options={{
@@ -53,15 +53,29 @@ const Chart = () => {
                         },
                         grid: { show: false },
                         xaxis: {
-                            // categories: data?.map(price =>
-                            //     new Date(price.time_open)
-                            //         .toISOString()
-                            //         .split('T')[0]
-                            //         .replaceAll('-', '')
-                            // ),
+                            categories: data?.map(
+                                price => new Date(price.time_open).toISOString().split('T')[0]
+                            ),
+                            type: 'datetime',
                             axisBorder: { show: false },
                             axisTicks: { show: false },
                             labels: { show: false },
+                        },
+                        yaxis: {
+                            show: false,
+                        },
+                        fill: {
+                            type: 'gradient',
+                            gradient: {
+                                gradientToColors: ['blue'],
+                                stops: [0, 100],
+                            },
+                        },
+                        colors: ['red'],
+                        tooltip: {
+                            y: {
+                                formatter: value => '$' + value.toFixed(2),
+                            },
                         },
                     }}
                 />
