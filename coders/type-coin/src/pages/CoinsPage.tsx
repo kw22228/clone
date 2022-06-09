@@ -5,7 +5,7 @@ import { CoinList } from '../components/CoinList';
 const CoinsPage = () => {
     return (
         <Container>
-            <Header title="Coin List" />
+            <Header title="COIN INFO" />
             <CoinList />
         </Container>
     );

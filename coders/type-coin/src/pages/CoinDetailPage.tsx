@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { CoinDetail } from '../components/CoinDetail';
 import { Header } from '../components/Header';
 import { Container } from '../styles/variable';
@@ -9,13 +9,12 @@ interface IParams {
 
 const CoinDetailPage = () => {
     const { coinId } = useParams<keyof IParams>() as IParams;
-    //Link에서 state를 태워서 보낸 값
 
     return (
         <Container>
-            <Header title={coinId} coinId={coinId} />
+            <Header title={coinId.split('-')[1].toUpperCase()} coinId={coinId} />
             <CoinDetail coinId={coinId} />
-            <Outlet />
+            <Outlet context={{ coinId }} />
         </Container>
     );
 };
