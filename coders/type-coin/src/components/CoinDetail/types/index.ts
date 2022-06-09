@@ -1,7 +1,5 @@
-////////////////////////// Props //////////////////////
-export interface IProps {
-    coinId: string;
-}
+import { Dispatch, SetStateAction } from 'react';
+import { IcoinInfo } from '../CoinDetailTypes';
 
 ////////////////////////// Coin Info /////////////////////
 export interface Tag {
@@ -107,4 +105,10 @@ export interface ICoinPrice {
     first_data_at: Date;
     last_updated: Date;
     quotes: Quotes;
+}
+
+////////////////////////// Props //////////////////////
+export interface IProps {
+    coinId: string;
+    setCoinDetail: Dispatch<SetStateAction<ICoinInfo | undefined>>;
 }
