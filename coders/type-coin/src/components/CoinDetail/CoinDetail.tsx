@@ -2,23 +2,43 @@ import { Loading } from '../Loading';
 import { ICoinInfo, ICoinPrice, IProps } from './types';
 import * as s from './CoinDetail.style';
 import { Link, useMatch } from 'react-router-dom';
-import { useFetch } from '../../hooks';
+import { useFetchAll } from '../../hooks';
 import { useEffect } from 'react';
+
+interface IFetch<T> {
+    isLoading: boolean;
+    data: T;
+}
 
 const CoinDetail = ({ coinId, setCoinDetail }: IProps) => {
     const priceMatch = useMatch('/:coinId/price');
     const chartMatch = useMatch('/:coinId/chart');
 
-    const { isLoading: detailLoading, data: detailData } = useFetch<ICoinInfo>(
-        ['detail', coinId],
-        `coins/${coinId}`
-    );
+    // const { isLoading: detailLoading, data: detailData } = useFetch<ICoinInfo>(
+    //     ['detail', coinId],
+    //     `coins/${coinId}`
+    // );
 
-    const { isLoading: priceLoading, data: priceData } = useFetch<ICoinPrice>(
-        ['price', coinId],
-        `tickers/${coinId}`,
-        { refetchInterval: 1000 * 10 }
-    );
+    // const { isLoading: priceLoading, data: priceData } = useFetch<ICoinPrice>(
+    //     ['price', coinId],
+    //     `tickers/${coinId}`,
+    //     { refetchInterval: 1000 * 10 }
+    // );
+
+    const result = useFetchAll([
+        {
+            queryKey: ['detail', coinId],
+            path: `coins/${coinId}`,
+        },
+        {
+            queryKey: ['price', coinId],
+            path: `tickers/${coinId}`,
+            options: { refetchInterval: 1000 * 10 },
+        },
+    ]);
+
+    const { isLoading: detailLoading, data: detailData } = result[0] as IFetch<ICoinInfo>;
+    const { isLoading: priceLoading, data: priceData } = result[1] as IFetch<ICoinPrice>;
 
     useEffect(() => {
         setCoinDetail(detailData);

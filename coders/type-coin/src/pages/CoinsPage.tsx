@@ -2,10 +2,13 @@ import { Container } from '../styles/variable';
 import { Header } from '../components/Header/';
 import { CoinList } from '../components/CoinList';
 
-const CoinsPage = () => {
+interface IProps {
+    toggleTheme: () => void;
+}
+const CoinsPage = ({ toggleTheme }: IProps) => {
     return (
         <Container>
-            <Header title="COIN INFO" />
+            <Header title="COIN INFO" toggleTheme={toggleTheme} />
             <CoinList />
         </Container>
     );
