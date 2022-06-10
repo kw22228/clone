@@ -110,5 +110,10 @@ export interface ICoinPrice {
 ////////////////////////// Props //////////////////////
 export interface IProps {
     coinId: string;
-    setCoinDetail: Dispatch<SetStateAction<ICoinInfo | undefined>>;
+    setCoinDetail: (data: ICoinInfo | undefined) => void;
 }
+
+// export interface IProps {
+//     coinId: string;
+//     setCoinDetail: Dispatch<SetStateAction<ICoinInfo | undefined>>;
+// }
