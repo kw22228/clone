@@ -1,13 +1,15 @@
 import { useMatch } from 'react-router-dom';
 import * as s from './Header.style';
 import { Helmet } from 'react-helmet';
+
 interface IHeader {
     title?: string;
     coinId?: string;
     symbol?: string | undefined;
+    toggleTheme?: () => void;
 }
 
-const Header = ({ title, coinId, symbol }: IHeader) => {
+const Header = ({ title, coinId, symbol, toggleTheme }: IHeader) => {
     const homeMatch = useMatch('/');
 
     return (
@@ -16,6 +18,7 @@ const Header = ({ title, coinId, symbol }: IHeader) => {
                 <title>{title}</title>
             </Helmet>
             <s.Header>
+                <s.DarkBtn onClick={toggleTheme}>Dark</s.DarkBtn>
                 {symbol && (
                     <img
                         style={{ width: 35, height: 35, marginRight: '10px' }}

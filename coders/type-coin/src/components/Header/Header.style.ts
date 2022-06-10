@@ -29,3 +29,8 @@ export const CustomLink = styled(Link)`
         color: ${props => props.theme.textColor};
     }
 `;
+
+export const DarkBtn = styled.button`
+    position: absolute;
+    left: 20px;
+`;
