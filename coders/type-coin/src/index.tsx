@@ -4,6 +4,7 @@ import App from './App';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { RecoilRoot } from 'recoil';
 
 //react-query initialize
 const queryClient = new QueryClient();
@@ -11,9 +12,11 @@ const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
     // <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={true} />
-        <App />
-    </QueryClientProvider>
+    <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={true} />
+            <App />
+        </QueryClientProvider>
+    </RecoilRoot>
     // </React.StrictMode>
 );

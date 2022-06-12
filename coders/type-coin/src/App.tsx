@@ -2,15 +2,16 @@ import { Router } from './router/index';
 import GlobalStyle from './styles/global';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
-import { useCallback, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { isDarkAtom } from './recoil/atoms/';
+
 function App() {
-    const [isDark, setIsDark] = useState(false);
-    const toggleTheme = useCallback(() => setIsDark(prev => !prev), [isDark]);
+    const isDark = useRecoilValue(isDarkAtom);
     return (
         <>
             <ThemeProvider theme={isDark ? theme.darkTheme : theme.lightTheme}>
                 <GlobalStyle />
-                <Router toggleTheme={toggleTheme} />
+                <Router />
             </ThemeProvider>
         </>
     );
