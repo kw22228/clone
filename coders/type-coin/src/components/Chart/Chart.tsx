@@ -3,6 +3,8 @@ import { useOutletContext } from 'react-router-dom';
 import { fetchData } from '../../api';
 import { Loading } from '../Loading';
 import ApexChart from 'react-apexcharts';
+import { useRecoilValue } from 'recoil';
+import { isDarkAtom } from '../../recoil/atoms';
 
 interface IContext {
     coinId: string;
@@ -20,6 +22,7 @@ interface IOlcv {
 }
 const Chart = () => {
     const { coinId } = useOutletContext() as IContext;
+    const isDark = useRecoilValue(isDarkAtom);
 
     const endDate = Math.floor(Date.now() / 1000);
     const startDate = endDate - 60 * 60 * 24 * 7 * 1;
@@ -45,7 +48,7 @@ const Chart = () => {
                         },
                     ]}
                     options={{
-                        theme: { mode: 'dark' },
+                        theme: { mode: isDark ? 'dark' : 'light' },
                         chart: { height: 600, width: 500, toolbar: { show: false } },
                         stroke: {
                             curve: 'smooth',
