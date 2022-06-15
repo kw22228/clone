@@ -25,7 +25,7 @@ const Chart = () => {
     const isDark = useRecoilValue(isDarkAtom);
 
     const endDate = Math.floor(Date.now() / 1000);
-    const startDate = endDate - 60 * 60 * 24 * 7 * 1;
+    const startDate = endDate - 60 * 60 * 12;
     const { isLoading, data } = useQuery<IOlcv[]>(['ohlcv', coinId], () =>
         fetchData(`coins/${coinId}/ohlcv/historical?start=${startDate}&end=${endDate}`)
     );
