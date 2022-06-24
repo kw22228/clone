@@ -15,6 +15,7 @@ interface ICoin {
 
 const CoinList = () => {
     const { isLoading, data } = useFetchSlice<ICoin[]>('allCoins', 'coins', 100);
+    console.log(data);
     return isLoading ? (
         <Loading />
     ) : (
