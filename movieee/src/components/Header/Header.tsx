@@ -1,28 +1,8 @@
 import * as s from './Header.style';
-import { motion, useAnimation, Variants, useViewportScroll } from 'framer-motion';
+import { motion, useAnimation, useViewportScroll } from 'framer-motion';
 import { Link, useNavigate, useMatch } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
-const logoVariants: Variants = {
-    normal: {
-        fillOpacity: 1,
-    },
-    active: {
-        fillOpacity: [1, 0.5, 1],
-        transition: {
-            repeat: Infinity,
-        },
-    },
-};
-
-const navVariants: Variants = {
-    top: {
-        backgroundColor: 'rgba(0, 0, 0, 0)',
-    },
-    scroll: {
-        backgroundColor: 'rgba(0, 0, 0, 1)',
-    },
-};
+import { navVariants, logoVariants } from '../../lib/animation/variants/header';
 
 const Header = () => {
     const navigate = useNavigate();

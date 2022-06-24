@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { widthPadding } from '../../styles/variable';
 
 export const Nav = styled(motion.nav)`
     width: 100%;
@@ -16,7 +17,7 @@ export const Nav = styled(motion.nav)`
 export const Col = styled.div`
     display: flex;
     align-items: center;
-    padding: 20px 50px;
+    padding: 20px ${widthPadding};
 `;
 
 export const Logo = styled(motion.svg)`
