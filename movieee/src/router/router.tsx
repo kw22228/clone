@@ -1,16 +1,16 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from '../components/Header';
 
-import { Main, Tv, Search } from '../pages';
+import { MainPage, TvPage, SearchPage } from '../pages';
 
 const Router = () => {
     return (
         <BrowserRouter>
             <Header />
             <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/tv" element={<Tv />} />
-                <Route path="/search" element={<Search />} />
+                <Route path="/" element={<MainPage />} />
+                <Route path="/tv" element={<TvPage />} />
+                <Route path="/search" element={<SearchPage />} />
             </Routes>
         </BrowserRouter>
     );
