@@ -1,3 +1,3 @@
-export { default as Main } from './Main';
-export { default as Tv } from './Tv';
-export { default as Search } from './Search';
+export { default as MainPage } from './MainPage';
+export { default as TvPage } from './TvPage';
+export { default as SearchPage } from './SearchPage';
