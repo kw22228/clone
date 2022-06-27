@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { widthPadding } from '../../styles/variable';
+
 export const Wrapper = styled.div`
     background-color: black;
-    padding: 0 ${widthPadding};
 `;
 
 export const Banner = styled.div<{ bgPhoto: string }>`
@@ -14,6 +14,7 @@ export const Banner = styled.div<{ bgPhoto: string }>`
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
         url(${props => props.bgPhoto});
     background-size: cover;
+    padding: 0 ${widthPadding};
 `;
 
 export const Title = styled.h2`
