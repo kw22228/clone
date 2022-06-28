@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as s from './Main.style';
 
 import MovieAPI from '../../lib/api/movie';
@@ -46,7 +46,10 @@ const Main = () => {
                         <s.OverView>{data?.results[0].overview}</s.OverView>
                     </s.Banner>
 
-                    <Slider toggleLeaving={toggleLeaving} sliderPage={sliderPage} />
+                    <s.SliderWrapper>
+                        <s.SliderTitle>Popular on NetFlix</s.SliderTitle>
+                        <Slider toggleLeaving={toggleLeaving} sliderPage={sliderPage} />
+                    </s.SliderWrapper>
                 </s.Wrapper>
             )}
         </>
