@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as s from './Slider.style';
 import { AnimatePresence } from 'framer-motion';
 import debounce from '../../lib/utils/debounce';
-import { rowVariants } from '../../lib/animation/variants/slider';
+import { boxVariants, infoVariants, rowVariants } from '../../lib/animation/variants/slider';
 import useGetQuery from '../../lib/hooks/useGetQuery';
 import { movieNowPlayingKey, sliderOffset } from '../../lib/utils/constants';
 import { IMovieList } from '../../lib/types/movieType';
@@ -48,12 +48,20 @@ const Slider = ({
                     {data?.results
                         .slice(1) //제일 처음쓴 영화는 제외.
                         .slice(sliderPage * sliderOffset, sliderPage * sliderOffset + sliderOffset)
-                        .map(({ id, title, backdrop_path }, index) => (
+                        .map(({ id, backdrop_path, title }) => (
                             <s.Box //
-                                bgphoto={getImagePath(backdrop_path, 'w200')}
+                                bgphoto={getImagePath(backdrop_path, 'w300')}
+                                variants={boxVariants}
+                                whileHover="hover"
+                                initial="normal"
+                                transition={{
+                                    type: 'tween',
+                                }}
                                 key={id}
                             >
-                                {title}
+                                <s.Info variants={infoVariants}>
+                                    <h4>{title}</h4>
+                                </s.Info>
                             </s.Box>
                         ))}
                 </s.Row>
