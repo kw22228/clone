@@ -11,13 +11,21 @@ import Loader from '../Loader/Loader';
 import Slider from '../Slider/Slider';
 
 import { sliderOffset } from '../../lib/utils/constants';
+import MovieInfo from '../MovieInfo/MovieInfo';
+import { AnimatePresence } from 'framer-motion';
+import { useParams } from 'react-router-dom';
 
+interface IMovie {
+    movieId: string;
+}
 const Main = () => {
     const { isLoading, data } = useFetch<IMovieList>(
         movieNowPlayingKey,
         movieNowPlayingPath,
         MovieAPI.all
     );
+    const { movieId } = useParams<keyof IMovie>() as IMovie;
+
     const maxPage = data //
         ? Math.ceil(data?.results.length / sliderOffset) - 2
         : 0;
@@ -37,20 +45,23 @@ const Main = () => {
             {isLoading ? (
                 <Loader />
             ) : (
-                <s.Wrapper>
-                    <s.Banner
-                        bgPhoto={getImagePath(data?.results[0].backdrop_path || '')}
-                        onClick={increaseIndex}
-                    >
-                        <s.Title>{data?.results[0].title}</s.Title>
-                        <s.OverView>{data?.results[0].overview}</s.OverView>
-                    </s.Banner>
+                <>
+                    <s.Wrapper>
+                        <s.Banner
+                            bgPhoto={getImagePath(data?.results[0].backdrop_path || '')}
+                            onClick={increaseIndex}
+                        >
+                            <s.Title>{data?.results[0].title}</s.Title>
+                            <s.OverView>{data?.results[0].overview}</s.OverView>
+                        </s.Banner>
 
-                    <s.SliderWrapper>
-                        <s.SliderTitle>Popular on NetFlix</s.SliderTitle>
-                        <Slider toggleLeaving={toggleLeaving} sliderPage={sliderPage} />
-                    </s.SliderWrapper>
-                </s.Wrapper>
+                        <s.SliderWrapper>
+                            <s.SliderTitle>Popular on NetFlix</s.SliderTitle>
+                            <Slider toggleLeaving={toggleLeaving} sliderPage={sliderPage} />
+                        </s.SliderWrapper>
+                    </s.Wrapper>
+                    <AnimatePresence>{movieId && <MovieInfo key={movieId} />}</AnimatePresence>
+                </>
             )}
         </>
     );
