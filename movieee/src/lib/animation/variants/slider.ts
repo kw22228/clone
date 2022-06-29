@@ -19,9 +19,9 @@ export const boxVariants: Variants = {
     },
     hover: {
         scale: 1.3,
-        y: -100,
+        y: -130,
         transition: {
-            delay: 0.5,
+            delay: 0.3,
             type: 'tween',
         },
     },
@@ -31,7 +31,7 @@ export const infoVariants: Variants = {
     hover: {
         opacity: 1,
         transition: {
-            delay: 0.5,
+            delay: 0.2,
             type: 'tween',
         },
     },
