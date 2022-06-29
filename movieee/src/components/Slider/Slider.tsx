@@ -7,6 +7,11 @@ import useGetQuery from '../../lib/hooks/useGetQuery';
 import { movieNowPlayingKey, sliderOffset } from '../../lib/utils/constants';
 import { IMovieList } from '../../lib/types/movieType';
 import getImagePath from '../../lib/utils/getImagePath';
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faPlayCircle } from '@fortawesome/free-regular-svg-icons';
+import { faGratipay } from '@fortawesome/free-brands-svg-icons';
+import { faChevronCircleDown, faStar } from '@fortawesome/free-solid-svg-icons';
 
 const Slider = ({
     sliderPage,
@@ -15,7 +20,13 @@ const Slider = ({
     sliderPage: number;
     toggleLeaving: () => void;
 }) => {
+    const navigate = useNavigate();
     const data = useGetQuery(movieNowPlayingKey) as IMovieList;
+
+    //box click
+    const onBoxClicked = (movieId: number) => {
+        navigate(`/movies/${movieId}`);
+    };
 
     //Resize
     const [domWidth, setDomWidth] = useState(window.innerWidth);
@@ -48,7 +59,7 @@ const Slider = ({
                     {data?.results
                         .slice(1) //제일 처음쓴 영화는 제외.
                         .slice(sliderPage * sliderOffset, sliderPage * sliderOffset + sliderOffset)
-                        .map(({ id, backdrop_path, title }) => (
+                        .map(({ id, backdrop_path, title, vote_average, popularity }) => (
                             <s.Box //
                                 bgphoto={getImagePath(backdrop_path, 'w300')}
                                 variants={boxVariants}
@@ -58,9 +69,32 @@ const Slider = ({
                                     type: 'tween',
                                 }}
                                 key={id}
+                                layoutId={String(id)}
                             >
                                 <s.Info variants={infoVariants}>
                                     <h4>{title}</h4>
+                                    <s.FontWrap>
+                                        <span>
+                                            <FontAwesomeIcon icon={faPlayCircle} />
+                                            <FontAwesomeIcon icon={faGratipay} />
+                                        </span>
+                                        <span>
+                                            <FontAwesomeIcon
+                                                icon={faChevronCircleDown}
+                                                onClick={onBoxClicked.bind(null, id)}
+                                            />
+                                        </span>
+                                    </s.FontWrap>
+                                    <s.RateWrap>
+                                        <span>
+                                            <FontAwesomeIcon icon={faStar} />
+                                            {vote_average}
+                                        </span>
+                                        <span>
+                                            <FontAwesomeIcon icon={faEye} />
+                                            {Math.ceil(popularity)}
+                                        </span>
+                                    </s.RateWrap>
                                 </s.Info>
                             </s.Box>
                         ))}

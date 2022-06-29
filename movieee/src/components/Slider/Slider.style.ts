@@ -19,6 +19,7 @@ export const Box = styled(motion.div)<{ bgphoto: string }>`
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
+    /* cursor: pointer; */
 
     &:first-child {
         transform-origin: left;
@@ -30,16 +31,53 @@ export const Box = styled(motion.div)<{ bgphoto: string }>`
 
 export const Info = styled(motion.div)`
     padding: 10px;
-    background-color: ${props => props.theme.black.lighter};
+    background-color: ${props => props.theme.black.veryDark};
     opacity: 0;
     width: 100%;
-
     position: absolute;
-    bottom: 0;
+    bottom: -52px;
 
     h4 {
-        text-align: center;
         font-weight: bold;
-        font-size: 15px;
+        font-size: 12px;
+    }
+`;
+
+export const FontWrap = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+
+    span svg {
+        cursor: pointer;
+        margin-right: 5px;
+        font-size: 23px;
+        color: white;
+
+        &:hover {
+            color: ${props => props.theme.white.darker};
+        }
+    }
+`;
+
+export const RateWrap = styled.div`
+    margin-top: 10px;
+    font-size: 8px;
+
+    span {
+        margin-right: 10px;
+    }
+
+    span:first-child svg {
+        font-size: 8px;
+        color: gold;
+        margin-right: 2px;
+    }
+
+    span:last-child svg {
+        font-size: 8px;
+        color: white;
+        margin-right: 2px;
     }
 `;
