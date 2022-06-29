@@ -15,6 +15,12 @@ const MovieAPI = {
 
         return data;
     },
+    detail: async <T>(path: string, quries: string[] = []): Promise<T> => {
+        const url = getQuery(path, quries);
+        const { data }: IAxios<T> = await axios.get(url);
+
+        return data;
+    },
 };
 
 export default MovieAPI;
