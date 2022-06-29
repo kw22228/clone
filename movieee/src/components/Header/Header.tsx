@@ -7,6 +7,7 @@ import { navVariants, logoVariants } from '../../lib/animation/variants/header';
 const Header = () => {
     const navigate = useNavigate();
     const homeMatch = useMatch('/');
+    const moviesMatch = useMatch('/movies/:movieId');
     const tvMatch = useMatch('/tv');
 
     const [isSearch, setIsSearch] = useState(false);
@@ -64,7 +65,7 @@ const Header = () => {
                     <s.Item>
                         <Link to="/">
                             Home
-                            {homeMatch && <s.ItemSelector layoutId="selector" />}
+                            {(homeMatch || moviesMatch) && <s.ItemSelector layoutId="selector" />}
                         </Link>
                     </s.Item>
                     <s.Item>
