@@ -8,9 +8,12 @@ const Router = () => {
         <BrowserRouter>
             <Header />
             <Routes>
-                <Route path="/" element={<MainPage />} />
+                <Route path="/" element={<MainPage />}>
+                    <Route path="/movies/:movieId" element={<MainPage />} />
+                </Route>
                 <Route path="/tv" element={<TvPage />} />
                 <Route path="/search" element={<SearchPage />} />
+                {/* <Route path="*" element={<MainPage />} /> */}
             </Routes>
         </BrowserRouter>
     );
